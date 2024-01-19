@@ -1,1 +1,35 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Weather App</title><script src="main.js" defer="defer"></script><script defer="defer" src="main.js"></script></head><body><h1>Hello</h1></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <script defer src="main.js"></script>
+  <script defer src="main.js"></script></head>
+  <body>
+    <div class="header">
+      <div id="logo-left">
+        <div class="icon" id="weather-app-logo"></div>
+        <h1>Weather App</h1>
+      </div>
+      <form>
+        <input id="search-bar" name="city" type="text" placeholder="Enter A City">
+        <button id="submit-city-btn" type="submit" for="search-bar">Submit</button>
+      </form>
+      <div class="convert-temp-btns">
+        <button id="fahrenheit-btn">Celcius</button>
+        <button id="celcius-btn">Fahrenheit</button>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="card">
+        <h1>City</h1>
+        <h2>Temp</h2>
+        <p>Feels like: </p>
+        <p>Humidity: </p>
+        <p>Wind: </p>
+      </div>
+    </div>
+
+  </body>
+</html>

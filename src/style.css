@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+:root {
+  --text-color: black;
+}
+
+body {
+  font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  height: 100vh;
+  /* display: grid; */
+}
+
+/* Header */
+
+.header {
+  padding-left: 16px;
+  padding-right: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#logo-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#weather-app-logo {
+  background-image: url(./assets/weather_icon.png);
+  background-size: cover;
+  height: 48px;
+  width: 48px;
+}
+
+#search-bar {
+  height: 24px;
+  width: 300px;
+  border-radius: 20px;
+  border-color: var(--text-color);
+  padding: 8px;
+}
+
+.convert-temp-btns {
+  display: flex;
+  gap: 16px;
+}
+
+/* Main Content */
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 16px;
+  width: 300px;
+  height: 300px;
+}
