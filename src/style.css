@@ -47,6 +47,10 @@ body {
   gap: 16px;
 }
 
+.selected {
+  background-color: red;
+}
+
 /* Main Content */
 
 .main-content {
@@ -64,4 +68,5 @@ body {
   border-radius: 16px;
   width: 300px;
   height: 300px;
+  padding: 16px 16px;
 }

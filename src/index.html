@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <script defer src="main.js"></script>
   </head>
   <body>
     <div class="header">
@@ -13,12 +12,12 @@
         <h1>Weather App</h1>
       </div>
       <form>
-        <input id="search-bar" name="city" type="text" placeholder="Enter A City">
+        <input id="search-bar" name="city" type="text" placeholder="Enter A City" required>
         <button id="submit-city-btn" type="submit" for="search-bar">Submit</button>
       </form>
       <div class="convert-temp-btns">
-        <button id="fahrenheit-btn">Celcius</button>
-        <button id="celcius-btn">Fahrenheit</button>
+        <button id="fahrenheit-btn" class="selected">°F / mph</button>
+        <button id="celcius-btn">°C / kph</button>
       </div>
     </div>
     <div class="main-content">
@@ -33,3 +32,4 @@
 
   </body>
 </html>
+
