@@ -2,6 +2,13 @@
 
 :root {
   --text-color: black;
+  --border-color: #858080;
+  --selected-color: #4D53B5
+}
+
+html {
+  background: linear-gradient(to bottom, cyan, aquamarine);
+  background-attachment: fixed;
 }
 
 body {
@@ -34,12 +41,26 @@ body {
   width: 48px;
 }
 
+form {
+  display: flex;
+}
+
 #search-bar {
   height: 24px;
   width: 300px;
-  border-radius: 20px;
   border-color: var(--text-color);
   padding: 8px;
+  margin-right: 0;
+}
+
+#submit-city-btn {
+  color: white;
+  margin-left: 0;
+  height: 44px;
+  width: 64px;
+  background-color: var(--selected-color);
+  border-color: var(--text-color);
+  border-left: none;
 }
 
 .convert-temp-btns {
@@ -48,15 +69,30 @@ body {
 }
 
 .selected {
-  background-color: red;
+  background-color: var(--selected-color);
+}
+
+.temp-btn {
+  font-weight: bold;
+  border: 1px solid var(--border-color);
+  height: 24px;
+  width: 100px;
+  border-radius: 8px;
 }
 
 /* Main Content */
 
 .main-content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+}
+
+/* Card */
+.card-container {
+  display: flex;
+  justify-content: center;
 }
 
 .card {
@@ -70,3 +106,54 @@ body {
   height: 300px;
   padding: 16px 16px;
 }
+
+/* Weekly Forecast */
+#weekly-forecast-title {
+  text-align: center;
+}
+
+.weekly-forecast-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+
+.forecast-section {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 16px 32px;
+}
+
+.forecast-list-header, .forecast-list, .forecast-item {
+  grid-column: span 7;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-content: center;
+  align-items: center;
+}
+
+.forecast-list-header {
+  font-weight: bold;
+}
+
+.forecast-list-header > *, .forecast-item > *  {
+  display: flex;
+  justify-content: center;
+}
+
+.forecast-item > img {
+  display: flex;
+  justify-content: center;
+}
+
+.forecast-item > img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.forecast-list-header, .forecast-item:not(:last-child) {
+  border-bottom: 2px solid var(--text-color);
+}
+

@@ -1,17 +1,21 @@
 import './style.css';
-import { fetchCurrWeather, fetchForecast, getWeatherOverViewFar, getWeatherOverViewCel } from './fetch';
-import {Card, createCard} from './domelms';
+import { fetchCurrWeather, fetchForecast, getWeatherOverView, getForeCastProp} from './fetch';
+import {createCard, createForecast} from './domelms';
+import Card from './card';
+import Forecast from './forecast';
 
 const searchBar = document.querySelector("#search-bar");
 const submitCityBtn = document.querySelector("#submit-city-btn");
-const mainContent = document.querySelector('.main-content');
+const cardContainer = document.querySelector('.card-container');
 const farBtn = document.querySelector('#fahrenheit-btn');
 const celBtn = document.querySelector('#celcius-btn');
-
+const foreCastList = document.querySelector('.forecast-list');
 
 let currIsFar = true;
 let selected = "F";
-let prevSearch;
+let prevSearch = "New York";
+
+// Helper functions
 
 const validateForm = async search => {
   try {
@@ -36,24 +40,12 @@ const validateForm = async search => {
   }
 }
 
-const clearMainContent = () => {
-  mainContent.innerHTML = '';
+const clearCardContainer = () => {
+  cardContainer.innerHTML = '';
 }
 
-const displayCard = async search => {
-  const data = await fetchCurrWeather(search);
-  console.log(data);
-  let cardData;
-  if (currIsFar) {
-    cardData = getWeatherOverViewFar(data);
-  } else {
-    cardData = getWeatherOverViewCel(data);
-  }
-  console.log(cardData);
-  const newCard = new Card(cardData.city, cardData.temp, cardData.feelsLike, cardData.humidity, cardData.gust, currIsFar);
-  const newCardElm = createCard(newCard);
-  clearMainContent();
-  mainContent.appendChild(newCardElm);
+const clearForecastList = () => {
+  foreCastList.innerHTML = '';
 }
 
 const toggleCurrTemp = () => {
@@ -78,18 +70,44 @@ const updatePrevSearch = newSearch => {
   prevSearch = newSearch;
 }
 
+// Event listener functions
+
+const displayCard = async search => {
+  const data = await fetchCurrWeather(search);
+  console.log(data);
+  const cardData = getWeatherOverView(data, currIsFar);
+  console.log(cardData);
+  const newCard = new Card(cardData.city, cardData.temp, cardData.feelsLike, cardData.humidity, cardData.gust, currIsFar);
+  const newCardElm = createCard(newCard);
+  clearCardContainer();
+  cardContainer.appendChild(newCardElm);
+}
+
+const displayForeCast = async search => {
+  const data = await fetchForecast(search);
+  console.log('forecastData', data);
+  const forecastDataArr = getForeCastProp(data, currIsFar);
+  console.table('forecastDataArr', forecastDataArr);
+  clearForecastList();
+  forecastDataArr.forEach(forecast => {
+    const newForecast = new Forecast(forecast.day, forecast.icon, forecast.chance, forecast.humidity, forecast.maxTemp, forecast.minTemp, forecast.avgTemp, currIsFar);
+    const newForecastElm = createForecast(newForecast);
+    foreCastList.appendChild(newForecastElm);
+  })
+}
+
 const switchTempSettings = async setting => {
-  console.log(`setting: ${setting}`)
-  console.log(`selected: ${selected}`)
   if (setting !== selected) {
-    console.log('here')
     toggleSelected();
     toggleCurrTemp();
     if (prevSearch !== undefined) {
       await displayCard(prevSearch);
+      await displayForeCast(prevSearch);
     }
   }
 }
+
+// Add event listeners
 
 submitCityBtn.addEventListener('click', async e => {
   e.preventDefault();
@@ -100,6 +118,7 @@ submitCityBtn.addEventListener('click', async e => {
       // console.log('in if')
       updatePrevSearch(city);
       await displayCard(city);
+      await displayForeCast(city);
     }
   } catch (err) {
       console.log('Unexpected error in submitCityBtn event listener:', err);
@@ -113,7 +132,11 @@ searchBar.addEventListener('input', () => {
 farBtn.addEventListener('click', () => switchTempSettings("F"));
 celBtn.addEventListener('click', () => switchTempSettings("C"));
 
+// Run functions when page first loads
 
+displayCard('New York');
+displayForeCast('New York');
 
 // fetchCurrWeather('london').then(res => console.log(res));
-// fetchForecast('london').then(res => console.log(res));
+fetchForecast('london').then(res => console.log("forecast", res));
+
