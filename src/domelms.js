@@ -1,14 +1,3 @@
-class Card {
-  constructor(city, temp, feelsLike, humidity, wind, isFar) {
-    this.city = city;
-    this.temp = temp;
-    this.feelsLike = feelsLike;
-    this.humidity = humidity;
-    this.wind = wind;
-    this.isFar = isFar;
-  }
-}
-
 const createCard = (card) => {
 
   // Initilize Dom Elms
@@ -34,5 +23,36 @@ const createCard = (card) => {
   return cardContainer;
 }
 
-export {Card, createCard}
+const createForecast = forecast => {
+  // Initilize Dom Elms
+  const forecastItem = document.createElement('div');
+  const day = document.createElement('p');
+  const imgContainer = document.createElement('div');
+  const icon = document.createElement('img');
+  const chance = document.createElement('p');
+  const humidity = document.createElement('p');
+  const maxTemp = document.createElement('p');
+  const minTemp = document.createElement('p');
+  const avgTemp = document.createElement('p');
+
+  // Add Classes and Attributes
+  forecastItem.classList.add('forecast-item');
+  imgContainer.classList.add('img-container');
+  icon.src = forecast.icon;
+
+  // Set text content
+  day.textContent = forecast.day;
+  chance.textContent = `${forecast.chance}%`;
+  humidity.textContent = `${forecast.humidity}%`;
+  maxTemp.textContent = forecast.isFar? `${forecast.maxTemp} °F`: `${forecast.maxTemp} °C`;
+  minTemp.textContent = forecast.isFar? `${forecast.minTemp} °F`: `${forecast.minTemp} °C`;
+  avgTemp.textContent = forecast.isFar? `${forecast.avgTemp} °F`: `${forecast.avgTemp} °C`;
+
+  // Set children
+  imgContainer.appendChild(icon)
+  forecastItem.append(day, imgContainer, chance, humidity, maxTemp, minTemp, avgTemp);
+  return forecastItem;
+}
+
+export {createForecast, createCard}
 
