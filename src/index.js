@@ -138,5 +138,5 @@ displayCard('New York');
 displayForeCast('New York');
 
 // fetchCurrWeather('london').then(res => console.log(res));
-fetchForecast('london').then(res => console.log("forecast", res));
+// fetchForecast('london').then(res => console.log("forecast", res));
 

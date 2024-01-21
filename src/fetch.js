@@ -42,16 +42,6 @@ const getWeatherOverView = (weatherData, isFar) =>
     humidity: weatherData.current.humidity
   })
 
-// const getWeatherOverViewCel = weatherData => 
-// ({
-//   city: weatherData.location.name,
-//   condition: weatherData.current.condition,
-//   temp: weatherData.current.temp_c,
-//   feelsLike: weatherData.current.feelslike_c,
-//   gust: weatherData.current.gust_kph,
-//   humidity: weatherData.current.humidity
-// })
-
 const getForeCastProp = (forecastData, isFar) => 
   forecastData.map((forecast, index) => 
     ({
